@@ -3,6 +3,9 @@ from typing import Union
 from fastapi import FastAPI
 from models.Bases import Item
 from models.Bases import User
+import uvicorn
+import os
+
 
 app = FastAPI()
 
@@ -27,3 +30,6 @@ def update_item(item_id: int, item: Item):
 @app.put("/users")
 def userfunc(mtumiaji:User):
     return{"name":mtumiaji.name,"age":mtumiaji.age}
+if __name__=="__main__":
+     port= int(os.getenv("PORT",8000))
+     uvicorn.run(app, host="0.0.0.0", port=port)
